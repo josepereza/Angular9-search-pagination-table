@@ -1,0 +1,32 @@
+.barra{
+    display:flex;
+    justify-content: space-between;
+    
+}
+.mimenu span {
+    margin-left: 10px;
+}
+
+.spacer{
+    flex:1 1 auto;
+}
+
+
+
+@media only screen and (max-width: 600px) {
+    .mimenu {
+      display:none;
+    }
+ .barra{
+     width: 100%;
+     text-align: center;
+     justify-content:space-around;
+ }
+ .boton1{
+     margin-left: -100px;
+ }
+ .logo{
+         text-align: center;
+     margin-left: -400px;
+ }
+  }

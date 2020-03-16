@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ProductosService } from "../productos.service";
 import {Product} from "../product";
 import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatTableDataSource} from '@angular/material/table';
+import {MatSort} from '@angular/material/sort';
 
 
 @Component({
@@ -10,6 +13,7 @@ import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Valida
   styleUrls: ['./listado.component.css']
 })
 export class ListadoComponent implements OnInit {
+  
   term : string;
   p: number = 1;
 
@@ -19,10 +23,16 @@ export class ListadoComponent implements OnInit {
   prod_desc = '';
   prod_price: number = null;
   actualizar:boolean=false;
-  
-  displayedColumns: string[] = ['prod_name', 'prod_price'];
   data: Product[] = [];
   isLoadingResults = true;
+  
+  displayedColumns: string[] = ['_id', 'prod_name', 'prod_desc', 'prod_price','actions'];
+
+  dataSource: MatTableDataSource<any>;
+
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
+
 
   constructor(private api: ProductosService,private formBuilder: FormBuilder) { }
 
@@ -39,7 +49,12 @@ this.Lista();
   Lista(){
     this.api.getProducts()
     .subscribe((res: any) => {
-      this.data = res;
+      this.dataSource= new MatTableDataSource(res);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+     
+
+      this.data=res;
       console.log(this.data);
       this.isLoadingResults = false;
     }, err => {
@@ -48,6 +63,11 @@ this.Lista();
     });
     
 
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
   onSubmit() {
     if (this.actualizar){
@@ -104,4 +124,13 @@ onFormSubmit() {
     this.Lista();
 
 }
+cambio(nombre){
+  alert('ha pulsado nombre ' + nombre)
+}
+}
+export interface misDatos {
+  _id: string;
+  prod_name: string;
+  prod_desc:string;
+  prod_price: number;
 }

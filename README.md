@@ -102,3 +102,45 @@ The PaginatePipe should be placed at the end of an NgFor expression. It accepts 
 * currentPage [number] - required The current (active) page number.
 * id [string] If you need to support more than one instance of pagination at a time, set the id and ensure it matches the id attribute of the PaginationControlsComponent / PaginationControlsDirective (see below).
 * totalItems [number] The total number of items in the collection. Only useful when doing server-side paging, where the collection size is limited to a single page returned by the server API. For in-memory paging, this property should not be set, as it will be automatically set to the value of collection.length.
+
+## How to use Materialize CSS in Angular 7-8-9
+
+* Install the materialize-css node package in your application. 
+```
+npm install materialize-css --save
+```
+* Open angular.json file & add below styles & scripts.
+ ```
+   "styles": [
+          "./node_modules/materialize-css/dist/css/materialize.css",
+        ],
+   "scripts": [
+          "./node_modules/materialize-css/dist/js/materialize.js"
+        ]
+   ``` 
+     
+ * To install css and javascript script.
+ To import the angular material theme and javascript scripts , include the given below code to your src > index.html file.
+   
+ ```  
+    <!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Borrar</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+  <app-root></app-root>
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.sidenav');
+    var instances = M.Sidenav.init(elems, {});
+  });
+  </script>
+</body>
+</html>
+```

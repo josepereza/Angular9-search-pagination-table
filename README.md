@@ -145,8 +145,9 @@ npm install materialize-css --save
 </html>
 ```
 ## ng-modal - A simple, lightweight interface for creating layered modal dialogs in Angular 6+
+https://github.com/pfbrowning/ng-modal
 
-Installation
+### Installation
 Install the npm module:
 ```
 $ npm install @browninglogic/ng-modal --save

@@ -19,6 +19,10 @@ import {MatInputModule} from '@angular/material/input';
 import { MatFormFieldModule} from '@angular/material/form-field';
 import {MatSortModule} from '@angular/material/sort';
 import {MatIconModule} from '@angular/material/icon';
+import { ModalManagerModule } from '@browninglogic/ng-modal';
+import {MatButtonModule} from '@angular/material/button';
+
+
 
 
 
@@ -49,7 +53,9 @@ import {MatIconModule} from '@angular/material/icon';
     MatInputModule,
     MatFormFieldModule,
     MatSortModule,
-    MatIconModule
+    MatIconModule,
+    ModalManagerModule,
+    MatButtonModule
   ],
   providers: [ProductosService],
   bootstrap: [AppComponent]

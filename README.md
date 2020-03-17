@@ -144,3 +144,85 @@ npm install materialize-css --save
 </body>
 </html>
 ```
+## ng-modal - A simple, lightweight interface for creating layered modal dialogs in Angular 6+
+
+Installation
+Install the npm module:
+```
+$ npm install @browninglogic/ng-modal --save
+```
+Then import ModalManagerModule:
+```
+import { ModalManagerModule } from '@browninglogic/ng-modal';
+
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    ModalManagerModule
+  ],
+  providers: [],
+  bootstrap: [ AppComponent ]
+})
+export class AppModule {}
+
+```
+
+Use the following syntax for declaring a modal-window component within your app
+```
+<nm-modal-window #layeredExample1>
+  <h1 header>You can put stuff in the header</h1>
+  <div body>
+    <p>Modal body paragraph text</p>
+    <input type="button" value="Show Another Modal" (click)="layeredExample2.show()" />
+  </div>
+  <div footer>You can also put stuff in the footer</div>
+</nm-modal-window>
+
+<nm-modal-window #layeredExample2>
+  <h1 header>Another Modal</h1>
+  <div body>
+    <p>I'm layered on top of the first modal!  Wow!</p>
+    <input type="button" value="Close Me" (click)="layeredExample2.hide()" />
+  </div>
+</nm-modal-window>
+
+<nm-modal-window #closeOnOverlayClickExample [closeOnOverlayClick]="true" [showCloseButton]="false">
+  <div body>
+    <p>This modal doesn't show a close button, but it will close if you click on the grey overlay.</p>
+  </div>
+</nm-modal-window>
+
+<nm-modal-window #closeButtonExample [closeOnOverlayClick]="false" [showCloseButton]="true">
+  <div body>
+    <p>This modal shows a close button, but it will not close if you click on the grey overlay.</p>
+  </div>
+</nm-modal-window>
+
+<nm-modal-window #onlyCloseProgrammaticallyExample [closeOnOverlayClick]="false" [showCloseButton]="false">
+  <div body>
+    <p>
+      This modal doesn't show a close button and it will not close if you click on the grey overlay.
+      It will only close if you call modalInstance.hide() on the component instance.  This is useful
+      if you want to implement your own close button or lock the screen to prevent the user
+      from interacting with the page behind the modal.
+    </p>
+    <input type="button" value="Close Me" (click)="onlyCloseProgrammaticallyExample.hide()" />
+  </div>
+</nm-modal-window>
+
+<nm-modal-window #customStylingExample modalClass="custom-styling-modal" overlayClass="custom-styling-overlay">
+  <div body>
+    <p>
+      This modal uses custom styling to change the border color of the modal window, 
+      the opacity of the overlay, and the font color.
+    </p>
+  </div>
+</nm-modal-window>
+```
+* closeOnOverlayClick (optional) - Specifies whether the modal will close itself when you click outside of the modal. Defaults to true.
+* showCloseButton (optional) - Specifies whether to show a close button in the top right corner of the window. Defaults to false.
+* modalClass (optional) - Specifies css class(es) to apply to the modal window. For example, if you want to override the border styling, change the background color, or specify a certain width, then that css would be applied here.
+* overlayClass (optional) - Specifies css class(es) to apply to the modal window. For example, if you want the background overlay to use a different color or opacity, then that css would be applied here.
